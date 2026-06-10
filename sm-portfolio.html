@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chidubem Ojukwu — Sales & Marketing Portfolio</title>
+    <meta name="description" content="Sales and Marketing portfolio of Chidubem Ojukwu — brand strategy, email automation, community growth, crisis PR, and more.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========================================================
+           DESIGN TOKENS — DARK MODE (default)
+        ======================================================== */
+        :root {
+            --primary: #E4F64A;
+            --bg: #1A1A1A;
+            --bg-alt: #141414;
+            --card: #242424;
+            --card-hover: #2C2C2C;
+            --border: rgba(255,255,255,0.07);
+            --text: #F0F4F8;
+            --text-muted: #8A9099;
+            --font-head: 'Plus Jakarta Sans', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
+            --shadow: 0 4px 24px rgba(0,0,0,0.35);
+            --noise-opacity: 0.025;
+        }
+
+        /* ========================================================
+           LIGHT MODE
+        ======================================================== */
+        body.light {
+            --primary: #C8DC00;
+            --bg: #F5F5F0;
+            --bg-alt: #EDEEE8;
+            --card: #FFFFFF;
+            --card-hover: #F8F8F4;
+            --border: rgba(0,0,0,0.08);
+            --text: #1A1A1A;
+            --text-muted: #6B7280;
+            --shadow: 0 4px 24px rgba(0,0,0,0.10);
+            --noise-opacity: 0.018;
+        }
+
+        /* ========================================================
+           GLOBAL RESET & BASE
+        ======================================================== */
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            line-height: 1.65;
+            transition: background-color 0.35s ease, color 0.35s ease;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Grain texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: var(--noise-opacity);
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-size: 180px 180px;
+        }
+
+        h1,h2,h3,h4 { font-family: var(--font-head); font-weight:700; line-height:1.25; }
+        a { color: inherit; text-decoration: none; transition: var(--transition); }
+        img { max-width:100%; height:auto; display:block; }
+        button { cursor:pointer; font-family: var(--font-body); }
+
+        .container { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+
+        section {
+            padding: 72px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        section:last-of-type { border-bottom: none; }
+
+        .section-title {
+            font-size: 1.75rem;
+            margin-bottom: 36px;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content:'';
+            position:absolute;
+            left:0; bottom:-8px;
+            width:28px; height:3px;
+            background: var(--primary);
+            border-radius:2px;
+        }
+
+        /* ========================================================
+           NAV BAR
+        ======================================================== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-alt);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: background 0.35s ease;
+        }
+
+        .navbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            padding: 0 24px;
+            max-width: 1020px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 1rem;
+            color: var(--primary);
+            letter-spacing: -0.3px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .nav-links a:hover { color: var(--primary); background: rgba(228,246,74,0.07); }
+
+        .theme-toggle {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            width: 44px;
+            height: 24px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 2px;
+            transition: var(--transition);
+            flex-shrink: 0;
+            margin-left: 8px;
+        }
+        .theme-toggle-knob {
+            width: 18px;
+            height: 18px;
+            background: var(--primary);
+            border-radius: 50%;
+            transition: transform 0.28s ease;
+        }
+        body.light .theme-toggle-knob { transform: translateX(20px); }
+
+        .theme-icon {
+            position: absolute;
+            font-size: 10px;
+            pointer-events: none;
+        }
+        .theme-icon.moon { left: 4px; opacity: 1; transition: opacity 0.2s; }
+        .theme-icon.sun  { right: 4px; opacity: 0.4; transition: opacity 0.2s; }
+        body.light .theme-icon.moon { opacity: 0.4; }
+        body.light .theme-icon.sun  { opacity: 1; }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        @media (max-width: 760px) {
+            .nav-links { display: none; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 56px; left: 0; right: 0;
+                background: var(--bg-alt);
+                border-bottom: 1px solid var(--border);
+                padding: 12px 24px 16px;
+                gap: 4px;
+                z-index: 99;
+            }
+            .hamburger { display: flex; }
+        }
+
+        /* ========================================================
+           CURSOR GLOW (nice-to-have)
+        ======================================================== */
+        .cursor-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(228,246,74,0.055) 0%, transparent 70%);
+            transition: opacity 0.4s ease;
+            opacity: 0;
+        }
+        body.light .cursor-glow {
+            background: radial-gradient(circle, rgba(180,200,0,0.045) 0%, transparent 70%);
+        }
+
+        /* ========================================================
+           HERO
+        ======================================================== */
+        .hero {
+            padding: 80px 0 48px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .profile-wrapper {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 24px;
+            position: relative;
+        }
+
+        .profile-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+        }
+
+        /* Fallback avatar shown when no real photo is loaded */
+        .profile-fallback {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: var(--card);
+            border: 3px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .profile-fallback svg { width:64px; height:64px; fill: var(--primary); }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 14px;
+        }
+        .hero h1 span { color: var(--primary); }
+
+        .hero-tagline {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 32px;
+            line-height: 1.7;
+        }
+
+        .btn-group { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+        .btn {
+            padding: 11px 26px;
+            border-radius: 30px;
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            border: none;
+        }
+        .btn-primary { background: var(--primary); color: #000; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(228,246,74,0.22); }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+        .btn-secondary:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+
+        /* Stats */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 150px);
+            gap: 16px;
+            justify-content: center;
+            margin: 40px auto 0;
+        }
+
+        .metric-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 18px 12px;
+            text-align: center;
+        }
+        .metric-num {
+            font-family: var(--font-head);
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+        .metric-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* ========================================================
+           SKILLS — TABBED (Tools / Expertise)
+        ======================================================== */
+        .tab-row {
+            display: flex;
+            gap: 0;
+            margin-bottom: 36px;
+            border-bottom: 2px solid var(--border);
+        }
+        .tab-pill {
+            background: none;
+            border: none;
+            font-family: var(--font-head);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            padding: 10px 20px;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: var(--transition);
+        }
+        .tab-pill.active { color: var(--primary); border-bottom-color: var(--primary); }
+        .tab-pill:hover:not(.active) { color: var(--text); }
+
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* Skill bars */
+        .skills-list { display: flex; flex-direction: column; gap: 18px; }
+
+        .skill-row { display: flex; flex-direction: column; gap: 6px; }
+
+        .skill-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+        .skill-name { font-size: 0.95rem; font-weight: 500; }
+        .skill-pct  { font-size: 0.82rem; color: var(--text-muted); }
+
+        .skill-track {
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .skill-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 3px;
+            width: 0;
+            transition: width 0.9s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        /* Expertise chips */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 14px;
+        }
+        .expertise-chip {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 16px 18px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+        .expertise-chip:hover { border-color: rgba(228,246,74,0.35); transform: translateY(-2px); }
+        .expertise-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            flex-shrink: 0;
+        }
+
+        /* ========================================================
+           PROJECTS / CASE STUDIES — TABBED
+        ======================================================== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .project-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            position: relative;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(228,246,74,0.3);
+            box-shadow: var(--shadow);
+        }
+        .project-card:focus-within {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        .project-thumb {
+            height: 160px;
+            background: var(--bg-alt);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .project-thumb svg { width:48px; height:48px; fill: var(--text-muted); opacity:0.5; }
+
+        .project-body {
+            padding: 22px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .project-tag {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .project-title { font-size: 1.1rem; margin-bottom: 8px; }
+        .project-desc  { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 18px; line-height: 1.6; }
+        .project-link  {
+            color: var(--primary);
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .project-link:hover { gap: 9px; }
+        .project-link:focus { outline: 2px solid var(--primary); outline-offset: 3px; border-radius: 3px; }
+
+        /* ========================================================
+           AWARDS / MILESTONES
+        ======================================================== */
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .award-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            transition: var(--transition);
+        }
+        .award-card:hover { border-color: rgba(228,246,74,0.3); transform: translateY(-3px); box-shadow: var(--shadow); }
+
+        .award-icon {
+            background: rgba(228,246,74,0.1);
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .award-icon svg { width: 26px; height: 26px; fill: var(--primary); }
+        .award-details h3 { font-size: 1rem; margin-bottom: 5px; }
+        .award-details p  { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* ========================================================
+           TESTIMONIALS
+        ======================================================== */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .testimonial-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 26px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+        .testimonial-card:hover { border-color: rgba(228,246,74,0.25); }
+
+        .t-score {
+            display: inline-block;
+            background: rgba(228,246,74,0.12);
+            color: var(--primary);
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+        }
+        .t-text {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.65;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .t-author h4   { font-size: 0.95rem; }
+        .t-author span { font-size: 0.82rem; color: var(--text-muted); }
+
+        /* ========================================================
+           RESOURCES
+        ======================================================== */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+        .resource-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 26px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: var(--transition);
+        }
+        .resource-card:hover { border-color: rgba(228,246,74,0.3); transform: translateY(-3px); box-shadow: var(--shadow); }
+        .resource-card:focus-within { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+        .resource-icon {
+            background: rgba(228,246,74,0.1);
+            width: 44px; height: 44px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .resource-icon svg { width: 22px; height: 22px; fill: var(--primary); }
+        .resource-title { font-size: 1rem; font-weight: 600; }
+        .resource-desc  { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; flex-grow: 1; }
+        .resource-link  {
+            color: var(--primary);
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .resource-link:hover { gap: 9px; }
+        .resource-link:focus { outline: 2px solid var(--primary); outline-offset: 3px; border-radius: 3px; }
+
+        /* ========================================================
+           FOOTER / CONTACT
+        ======================================================== */
+        .footer {
+            padding: 64px 0 32px;
+            text-align: center;
+        }
+        .footer-profile {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 2px solid var(--primary);
+            object-fit: cover;
+        }
+        .footer-fallback {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 2px solid var(--primary);
+            background: var(--card);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .footer-fallback svg { width: 34px; height: 34px; fill: var(--primary); }
+
+        .footer h2 { font-size: 1.5rem; margin-bottom: 8px; }
+        .footer-sub { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 32px; }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            gap: 12px;
+        }
+        .contact-item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 12px 8px;
+            border-radius: var(--radius-sm);
+            font-size: 0.82rem;
+            font-weight: 500;
+            text-align: center;
+            transition: var(--transition);
+            display: block;
+        }
+        .contact-item:hover { border-color: var(--primary); color: var(--primary); }
+        .contact-item:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+        .copyright { font-size: 0.78rem; color: var(--text-muted); }
+
+        /* ========================================================
+           SCROLL REVEAL
+        ======================================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .skill-fill { transition: none; }
+        }
+
+        /* ========================================================
+           RESPONSIVE
+        ======================================================== */
+        @media (max-width: 900px) {
+            .testimonials-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 720px) {
+            .projects-grid,
+            .resources-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.9rem; }
+            .metrics-grid { grid-template-columns: repeat(3, 1fr); }
+            .contact-grid { grid-template-columns: repeat(2, 1fr); max-width: 320px; }
+            .awards-grid { grid-template-columns: 1fr; }
+            .expertise-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .metrics-grid { grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+            .metric-num { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cursor glow -->
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+    <!-- ====================================================
+         NAVBAR
+    ==================================================== -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar-inner">
+            <span class="nav-logo">Chidubem.</span>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Work</a></li>
+                <li><a href="#awards">Awards</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <div style="display:flex; align-items:center; gap:8px;">
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    aria-label="Toggle light and dark mode"
+                    title="Toggle theme"
+                >
+                    <span class="theme-icon moon" aria-hidden="true">🌙</span>
+                    <span class="theme-icon sun"  aria-hidden="true">☀️</span>
+                    <span class="theme-toggle-knob"></span>
+                </button>
+                <button
+                    class="hamburger"
+                    id="hamburger"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false"
+                    aria-controls="navLinks"
+                >
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ====================================================
+         HERO
+    ==================================================== -->
+    <header class="hero" id="home">
+        <div class="container">
+
+            <!-- 
+                PHOTO INSTRUCTIONS:
+                To add your photo, replace the .profile-fallback div below with:
+                <img src="YOUR_PHOTO_FILENAME.jpg" alt="Chidubem Ojukwu" class="profile-img">
+
+                If hosting on GitHub Pages, place your photo file in the same folder
+                as this HTML file and use just the filename, e.g. src="photo.jpg"
+
+                If using Google Drive: share the file publicly, get the file ID from the
+                shareable link, then use:
+                src="https://drive.google.com/uc?export=view&id=YOUR_FILE_ID"
+            -->
+            <div class="profile-wrapper">
+                <div class="profile-fallback" role="img" aria-label="Profile photo placeholder">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+                </div>
+            </div>
+
+            <h1>Hi, I'm <span>Chidubem.</span></h1>
+            <p class="hero-tagline">Touching across brand strategy, crisis communication, and community growth — this is a record of nine tasks, real products, and the kind of marketing work that gets results.</p>
+
+            <div class="btn-group">
+                <a href="#projects" class="btn btn-primary">View Work</a>
+                <a href="#contact"  class="btn btn-secondary">Get in Touch</a>
+            </div>
+
+            <div class="metrics-grid" role="list" aria-label="Key statistics">
+                <div class="metric-card" role="listitem">
+                    <span class="metric-num">9</span>
+                    <span class="metric-label">Tasks Completed</span>
+                </div>
+                <div class="metric-card" role="listitem">
+                    <span class="metric-num">82%</span>
+                    <span class="metric-label">Avg Score</span>
+                </div>
+                <div class="metric-card" role="listitem">
+                    <span class="metric-num">3</span>
+                    <span class="metric-label">Clients Served</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ====================================================
+         SKILLS
+    ==================================================== -->
+    <section id="skills">
+        <div class="container reveal">
+            <h2 class="section-title">Skills</h2>
+
+            <div class="tab-row" role="tablist" aria-label="Skills categories">
+                <button class="tab-pill active" role="tab" aria-selected="true"  aria-controls="panel-tools"    id="tab-tools"    onclick="switchTab('tools')">Tools</button>
+                <button class="tab-pill"        role="tab" aria-selected="false" aria-controls="panel-expertise" id="tab-expertise" onclick="switchTab('expertise')">Expertise</button>
+            </div>
+
+            <!-- TOOLS -->
+            <div class="tab-panel active" id="panel-tools" role="tabpanel" aria-labelledby="tab-tools">
+                <div class="skills-list" id="skillsBars">
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name">Brevo (Email Automation)</span><span class="skill-pct">90%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name">Canva</span><span class="skill-pct">82%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="82"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name">Notion</span><span class="skill-pct">88%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="88"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name">Airtable</span><span class="skill-pct">80%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="80"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name">Google Analytics</span><span class="skill-pct">72%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="72"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name">Meta Ads Manager</span><span class="skill-pct">70%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="70"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name">LinkedIn Campaign Manager</span><span class="skill-pct">70%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="70"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name">Google Docs / Slides</span><span class="skill-pct">96%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="96"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name">CapCut</span><span class="skill-pct">70%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="70"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name">Google Search Console</span><span class="skill-pct">72%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="72"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXPERTISE -->
+            <div class="tab-panel" id="panel-expertise" role="tabpanel" aria-labelledby="tab-expertise">
+                <div class="expertise-grid">
+                    <div class="expertise-chip"><span class="expertise-dot" aria-hidden="true"></span>Audience Psychology</div>
+                    <div class="expertise-chip"><span class="expertise-dot" aria-hidden="true"></span>Funnel Architecture</div>
+                    <div class="expertise-chip"><span class="expertise-dot" aria-hidden="true"></span>Strategic Copywriting</div>
+                    <div class="expertise-chip"><span class="expertise-dot" aria-hidden="true"></span>Brand Positioning</div>
+                    <div class="expertise-chip"><span class="expertise-dot" aria-hidden="true"></span>Content Systems Thinking</div>
+                    <div class="expertise-chip"><span class="expertise-dot" aria-hidden="true"></span>Crisis Communication</div>
+                    <div class="expertise-chip"><span class="expertise-dot" aria-hidden="true"></span>Community Strategy</div>
+                    <div class="expertise-chip"><span class="expertise-dot" aria-hidden="true"></span>Data-Informed Decisions</div>
+                    <div class="expertise-chip"><span class="expertise-dot" aria-hidden="true"></span>Conversion Optimisation</div>
+                    <div class="expertise-chip"><span class="expertise-dot" aria-hidden="true"></span>Cross-functional Collaboration</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         PROJECTS / CASE STUDIES
+    ==================================================== -->
+    <section id="projects">
+        <div class="container reveal">
+            <h2 class="section-title">Work</h2>
+
+            <div class="tab-row" role="tablist" aria-label="Work categories">
+                <button class="tab-pill active" role="tab" aria-selected="true"  aria-controls="panel-projects"    id="tab-projects"    onclick="switchTab('projects')">Projects</button>
+                <button class="tab-pill"        role="tab" aria-selected="false" aria-controls="panel-casestudies" id="tab-casestudies" onclick="switchTab('casestudies')">Case Studies</button>
+            </div>
+
+            <!-- PROJECTS -->
+            <div class="tab-panel active" id="panel-projects" role="tabpanel" aria-labelledby="tab-projects">
+                <div class="projects-grid">
+
+                    <article class="project-card">
+                        <div class="project-thumb" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <p class="project-tag">Community Strategy · Stage 7</p>
+                                <h3 class="project-title">TechiesMatch — The Wired Community</h3>
+                                <p class="project-desc">Designed a full community-led growth strategy for TechiesMatch, including dual-platform architecture (Telegram + LinkedIn), a 2-week activity calendar, 10 engagement prompts, and a conversion plan that moved members toward product sign-up without feeling like a sales funnel.</p>
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1n5Va3S89osLkjbtcevrcUn_bX8nO4ZED?usp=drive_link" target="_blank" class="project-link" aria-label="View TechiesMatch Community Strategy">View Project →</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-thumb" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <p class="project-tag">Email Automation · Stage 8A</p>
+                                <h3 class="project-title">TechiesMatch — Email Funnel Campaign</h3>
+                                <p class="project-desc">Built a 7-email automation campaign on Brevo for TechiesMatch, including funnel mapping, three audience segments, branching workflow logic, and a personalisation strategy. Rated one of the strongest strategy documents in the cohort.</p>
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1n5Va3S89osLkjbtcevrcUn_bX8nO4ZED?usp=drive_link" target="_blank" class="project-link" aria-label="View TechiesMatch Email Funnel Campaign">View Project →</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-thumb" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-1 14H5c-.55 0-1-.45-1-1V7h16v10c0 .55-.45 1-1 1zM7 10h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z"/></svg>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <p class="project-tag">Website & SEO · Stage 8B</p>
+                                <h3 class="project-title">TechiesMatch — Growth Website</h3>
+                                <p class="project-desc">Designed and deployed a multi-page website for TechiesMatch with SEO keyword research, conversion-focused copy, a Safety page, waitlist funnel, and WCAG-compliant accessibility. The SEO and content strategy were among the best reviewed in the cohort.</p>
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1n5Va3S89osLkjbtcevrcUn_bX8nO4ZED?usp=drive_link" target="_blank" class="project-link" aria-label="View TechiesMatch Growth Website">View Project →</a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+
+            <!-- CASE STUDIES -->
+            <div class="tab-panel" id="panel-casestudies" role="tabpanel" aria-labelledby="tab-casestudies">
+                <div class="projects-grid">
+
+                    <article class="project-card">
+                        <div class="project-thumb" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <p class="project-tag">Brand Strategy · Stage 1</p>
+                                <h3 class="project-title">Brand Analysis — Nigerian Startup Deep Dive</h3>
+                                <p class="project-desc">Conducted a full brand analysis of a high-growth Nigerian startup, covering brand identity, UVP, messaging, customer journey, and competitive positioning. Delivered five differentiators and actionable improvement recommendations.</p>
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1n5Va3S89osLkjbtcevrcUn_bX8nO4ZED?usp=drive_link" target="_blank" class="project-link" aria-label="View Brand Analysis Case Study">View Case Study →</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-thumb" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96C5 16.1 6.1 17 7 17h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H19c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0 0 23.45 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <p class="project-tag">Campaign Strategy · Stage 2</p>
+                                <h3 class="project-title">The Boring Product Campaign</h3>
+                                <p class="project-desc">Transformed a low-interest everyday product into a compelling brand with a full-funnel marketing strategy — customer personas, ad copies, a landing page, email flow, and three growth hack ideas — demonstrating how strong positioning creates demand from scratch.</p>
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1n5Va3S89osLkjbtcevrcUn_bX8nO4ZED?usp=drive_link" target="_blank" class="project-link" aria-label="View Boring Product Campaign Case Study">View Case Study →</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-thumb" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <p class="project-tag">Multi-Channel Strategy · Stage 3</p>
+                                <h3 class="project-title">Comprehensive Marketing Strategy — MenuCard</h3>
+                                <p class="project-desc">Developed a data-driven, multi-channel marketing strategy for MenuCard, a digital menu creation platform, following direct founder engagement. Covered SEO, paid ads, social media, content, and email marketing with keyword research and search intent mapping.</p>
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1n5Va3S89osLkjbtcevrcUn_bX8nO4ZED?usp=drive_link" target="_blank" class="project-link" aria-label="View MenuCard Marketing Strategy Case Study">View Case Study →</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-thumb" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <p class="project-tag">Founder Marketing · Stage 4B · 10.5/10</p>
+                                <h3 class="project-title">Founder-Led Marketing Strategy</h3>
+                                <p class="project-desc">Designed a founder-led marketing strategy positioning the startup founder as an authority figure across Instagram, Twitter, and LinkedIn. Received extra credit for thinking outside the brief — rated exceptional by mentors with a 10.5/10 score.</p>
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1n5Va3S89osLkjbtcevrcUn_bX8nO4ZED?usp=drive_link" target="_blank" class="project-link" aria-label="View Founder-Led Marketing Strategy Case Study">View Case Study →</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-thumb" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <p class="project-tag">Crisis PR · Stage 5 · 8.89/10</p>
+                                <h3 class="project-title">Crisis PR & Brand Management Simulation</h3>
+                                <p class="project-desc">Simulated a full PR crisis response for a startup — defining the crisis, drafting stakeholder communications, designing a brand recovery campaign, and establishing KPIs. Praised for exceptional strategic clarity and sophisticated stakeholder differentiation.</p>
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1n5Va3S89osLkjbtcevrcUn_bX8nO4ZED?usp=drive_link" target="_blank" class="project-link" aria-label="View Crisis PR Case Study">View Case Study →</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-thumb" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <p class="project-tag">B2B Growth · Stage 6</p>
+                                <h3 class="project-title">Enterprise B2B Growth Architecture</h3>
+                                <p class="project-desc">Designed a full-funnel B2B growth system for an AI-powered SaaS product targeting Nigerian and UK enterprise markets. Included multi-threaded buyer journey, demand strategy, lead scoring, paid acquisition under a $5K/month constraint, and a sales enablement toolkit.</p>
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1n5Va3S89osLkjbtcevrcUn_bX8nO4ZED?usp=drive_link" target="_blank" class="project-link" aria-label="View Enterprise B2B Growth Architecture Case Study">View Case Study →</a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         AWARDS
+    ==================================================== -->
+    <section id="awards">
+        <div class="container reveal">
+            <h2 class="section-title">Awards & Recognition</h2>
+            <div class="awards-grid">
+
+                <div class="award-card">
+                    <div class="award-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.99 5.99 0 0 0 11 15.91V19H9v2h6v-2h-2v-3.09c1.73-.37 3.22-1.4 3.96-2.97 2.47-.31 4.39-2.4 4.39-4.94V7c0-1.1-.9-2-2-2zM5 7h2v3H5V7zm14 3h-2V7h2v3z"/></svg>
+                    </div>
+                    <div class="award-details">
+                        <h3>Best S&M Intern — Interns' Choice</h3>
+                        <p>Voted by fellow HNG Cohort 14 Sales & Marketing interns across all stages.</p>
+                    </div>
+                </div>
+
+                <div class="award-card">
+                    <div class="award-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.99 5.99 0 0 0 11 15.91V19H9v2h6v-2h-2v-3.09c1.73-.37 3.22-1.4 3.96-2.97 2.47-.31 4.39-2.4 4.39-4.94V7c0-1.1-.9-2-2-2zM5 7h2v3H5V7zm14 3h-2V7h2v3z"/></svg>
+                    </div>
+                    <div class="award-details">
+                        <h3>Best S&M Intern — Mentors' Choice</h3>
+                        <p>Awarded by HNG mentors and evaluators at the close of Cohort 14.</p>
+                    </div>
+                </div>
+
+                <div class="award-card">
+                    <div class="award-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.99 5.99 0 0 0 11 15.91V19H9v2h6v-2h-2v-3.09c1.73-.37 3.22-1.4 3.96-2.97 2.47-.31 4.39-2.4 4.39-4.94V7c0-1.1-.9-2-2-2zM5 7h2v3H5V7zm14 3h-2V7h2v3z"/></svg>
+                    </div>
+                    <div class="award-details">
+                        <h3>Leaderboard #1 — Stage 4</h3>
+                        <p>Topped the Sales & Marketing leaderboard with a 10.5/10 score, with extra credit for exceptional originality.</p>
+                    </div>
+                </div>
+
+                <div class="award-card">
+                    <div class="award-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.99 5.99 0 0 0 11 15.91V19H9v2h6v-2h-2v-3.09c1.73-.37 3.22-1.4 3.96-2.97 2.47-.31 4.39-2.4 4.39-4.94V7c0-1.1-.9-2-2-2zM5 7h2v3H5V7zm14 3h-2V7h2v3z"/></svg>
+                    </div>
+                    <div class="award-details">
+                        <h3>Leaderboard #1 — Stage 5</h3>
+                        <p>Topped the leaderboard with an 8.89/10 for Crisis PR strategy — praised for exceptional crisis clarity and sophisticated stakeholder thinking.</p>
+                    </div>
+                </div>
+
+                <div class="award-card">
+                    <div class="award-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.99 5.99 0 0 0 11 15.91V19H9v2h6v-2h-2v-3.09c1.73-.37 3.22-1.4 3.96-2.97 2.47-.31 4.39-2.4 4.39-4.94V7c0-1.1-.9-2-2-2zM5 7h2v3H5V7zm14 3h-2V7h2v3z"/></svg>
+                    </div>
+                    <div class="award-details">
+                        <h3>Leaderboard #1 — Stage 8</h3>
+                        <p>Topped the leaderboard with a 9.1/10 average — recognised for genuine growth thinking and one of the strongest SEO + email strategies in the cohort.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         TESTIMONIALS
+    ==================================================== -->
+    <section id="testimonials">
+        <div class="container reveal">
+            <h2 class="section-title">Testimonials</h2>
+            <div class="testimonials-grid">
+
+                <div class="testimonial-card">
+                    <div>
+                        <span class="t-score">Peer Review</span>
+                        <p class="t-text">"Dubem is a proactive marketer with a very special knack for creativity. His skills across different fields give him an exceptional edge. He isn't only an excellent marketer — he's a leader by extension, and his work ethic is top notch. He is the type of person whose name I can mention anywhere without fear of it backfiring."</p>
+                    </div>
+                    <div class="t-author">
+                        <h4>Sumayyaah Bint Yahya</h4>
+                        <span>Digital Marketing Strategist · Same team, HNG Cohort 14</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div>
+                        <span class="t-score">Stage 8 · 9.1/10</span>
+                        <p class="t-text">"One of the strongest strategy documents in the cohort — demonstrating genuine growth thinking rather than checklist completion. The SEO and content strategy are particularly strong, and the conversion logic throughout is among the best reviewed. The principle that pages should provide value before asking for action is reflected consistently across the site."</p>
+                    </div>
+                    <div class="t-author">
+                        <h4>HNG Mentor Evaluation</h4>
+                        <span>Email Automation & Website · Stage 8</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div>
+                        <span class="t-score">Stage 4 · 10.5/10</span>
+                        <p class="t-text">"You thought outside the box and did something different from the others. A superb and very tidy work — well done."</p>
+                    </div>
+                    <div class="t-author">
+                        <h4>HNG Mentor Evaluation</h4>
+                        <span>Founder-Led Marketing Strategy · Stage 4</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         RESOURCES
+    ==================================================== -->
+    <section id="resources">
+        <div class="container reveal">
+            <h2 class="section-title">Resources</h2>
+            <div class="resources-grid">
+
+                <div class="resource-card">
+                    <div class="resource-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-1 14H5c-.55 0-1-.45-1-1V7h16v10c0 .55-.45 1-1 1zM7 10h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z"/></svg>
+                    </div>
+                    <h3 class="resource-title">7-Email Automation Sequence Template</h3>
+                    <p class="resource-desc">A ready-to-adapt email funnel template covering awareness through retention — with subject lines, preview texts, CTAs, and branching logic included. Built on the TechiesMatch Brevo campaign.</p>
+                    <a href="https://drive.google.com/drive/folders/1n5Va3S89osLkjbtcevrcUn_bX8nO4ZED?usp=drive_link" target="_blank" class="resource-link" aria-label="Download 7-Email Automation Sequence Template">Download Template →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                    </div>
+                    <h3 class="resource-title">Community-Led Growth Playbook</h3>
+                    <p class="resource-desc">A structured guide to building a product community from scratch — covering platform selection, positioning, 2-week activity planning, engagement prompts, and a conversion path that doesn't feel like selling.</p>
+                    <a href="https://drive.google.com/drive/folders/1n5Va3S89osLkjbtcevrcUn_bX8nO4ZED?usp=drive_link" target="_blank" class="resource-link" aria-label="Download Community-Led Growth Playbook">Download Playbook →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                    </div>
+                    <h3 class="resource-title">Founder-Led Marketing Content Framework</h3>
+                    <p class="resource-desc">A reusable framework for positioning a founder as a credible voice — including narrative structure, content pillars, platform-specific post formats, and a 4-week calendar template for Instagram, Twitter, and LinkedIn.</p>
+                    <a href="https://drive.google.com/drive/folders/1n5Va3S89osLkjbtcevrcUn_bX8nO4ZED?usp=drive_link" target="_blank" class="resource-link" aria-label="Download Founder-Led Marketing Content Framework">Download Framework →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+                    </div>
+                    <h3 class="resource-title">B2B Lead Scoring & Qualification Model</h3>
+                    <p class="resource-desc">A practical scoring model combining behavioural and firmographic signals to define MQL, SQL, and disqualification rules — built for SaaS products with 3–9 month sales cycles in emerging markets.</p>
+                    <a href="https://drive.google.com/drive/folders/1n5Va3S89osLkjbtcevrcUn_bX8nO4ZED?usp=drive_link" target="_blank" class="resource-link" aria-label="Download B2B Lead Scoring Model">Download Model →</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         FOOTER / CONTACT
+    ==================================================== -->
+    <footer class="footer" id="contact">
+        <div class="container">
+
+            <div class="footer-fallback" role="img" aria-label="Chidubem Ojukwu">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+            </div>
+
+            <h2>Let's work together.</h2>
+            <p class="footer-sub">Open to freelance projects, collaborations, and full-time opportunities.</p>
+
+            <nav class="contact-grid" aria-label="Contact links">
+                <a href="mailto:placeholder@email.com"         class="contact-item" aria-label="Send an email">Email</a>
+                <a href="tel:+2340000000000"                   class="contact-item" aria-label="Call by phone">Phone</a>
+                <a href="https://wa.me/2340000000000"          class="contact-item" aria-label="Message on WhatsApp" target="_blank" rel="noopener">WhatsApp</a>
+                <a href="https://twitter.com/placeholder"      class="contact-item" aria-label="Follow on Twitter" target="_blank" rel="noopener">Twitter</a>
+                <a href="https://linkedin.com/in/ojukwuii"     class="contact-item" aria-label="Connect on LinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+            </nav>
+
+            <p class="copyright">&copy; 2026 Chidubem Ojukwu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ====================================================
+         JAVASCRIPT
+    ==================================================== -->
+    <script>
+    (function() {
+
+        /* ---------- THEME TOGGLE ---------- */
+        const body        = document.body;
+        const toggle      = document.getElementById('themeToggle');
+        const savedTheme  = localStorage.getItem('theme');
+
+        if (savedTheme === 'light') body.classList.add('light');
+
+        toggle.addEventListener('click', function() {
+            body.classList.toggle('light');
+            localStorage.setItem('theme', body.classList.contains('light') ? 'light' : 'dark');
+        });
+
+
+        /* ---------- HAMBURGER NAV ---------- */
+        const hamburger = document.getElementById('hamburger');
+        const navLinks  = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', function() {
+            const isOpen = navLinks.classList.toggle('open');
+            hamburger.setAttribute('aria-expanded', isOpen);
+        });
+
+        navLinks.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('open');
+                hamburger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+
+        /* ---------- CURSOR GLOW ---------- */
+        const glow = document.getElementById('cursorGlow');
+        let glowVisible = false;
+
+        document.addEventListener('mousemove', function(e) {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top  = e.clientY + 'px';
+            if (!glowVisible) {
+                glow.style.opacity = '1';
+                glowVisible = true;
+            }
+        });
+
+        document.addEventListener('mouseleave', function() {
+            glow.style.opacity = '0';
+            glowVisible = false;
+        });
+
+
+        /* ---------- SCROLL REVEAL ---------- */
+        const reveals = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        reveals.forEach(function(el) { revealObserver.observe(el); });
+
+
+        /* ---------- SKILL BAR ANIMATION ---------- */
+        const skillBars     = document.querySelectorAll('.skill-fill');
+        let barsAnimated    = false;
+
+        const barObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting && !barsAnimated) {
+                    barsAnimated = true;
+                    skillBars.forEach(function(bar) {
+                        bar.style.width = bar.getAttribute('data-width') + '%';
+                    });
+                    barObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const skillSection = document.getElementById('skills');
+        if (skillSection) barObserver.observe(skillSection);
+
+
+        /* ---------- UNIFIED TAB SWITCHER ---------- */
+        window.switchTab = function(tabId) {
+            // Find which tab-row the clicked button belongs to
+            const clickedBtn = event.currentTarget || event.target;
+
+            // Find sibling buttons in the same tab-row
+            const tabRow = clickedBtn.closest('.tab-row');
+            if (!tabRow) return;
+
+            const siblingBtns   = tabRow.querySelectorAll('.tab-pill');
+            const parentSection = tabRow.closest('section') || tabRow.parentElement;
+
+            // Deactivate all sibling tabs
+            siblingBtns.forEach(function(btn) {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
+            });
+
+            // Activate clicked tab
+            clickedBtn.classList.add('active');
+            clickedBtn.setAttribute('aria-selected', 'true');
+
+            // Find panels that belong to this section and deactivate them
+            const panels = parentSection.querySelectorAll('.tab-panel');
+            panels.forEach(function(panel) {
+                panel.classList.remove('active');
+            });
+
+            // Activate the target panel
+            const targetPanel = document.getElementById('panel-' + tabId);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+
+                // Re-run bar animation if switching to tools tab
+                if (tabId === 'tools') {
+                    barsAnimated = false;
+                    setTimeout(function() {
+                        skillBars.forEach(function(bar) {
+                            bar.style.width = bar.getAttribute('data-width') + '%';
+                        });
+                    }, 50);
+                }
+            }
+        };
+
+    })();
+    </script>
+
+</body>
+</html>
