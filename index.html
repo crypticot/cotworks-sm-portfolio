@@ -235,9 +235,11 @@
             background: radial-gradient(circle, rgba(228,246,74,0.055) 0%, transparent 70%);
             transition: opacity 0.4s ease;
             opacity: 0;
+			mix-blend-mode: screen; /* Keeps it glowing nicely over dark surfaces */
         }
         body.light .cursor-glow {
-            background: radial-gradient(circle, rgba(180,200,0,0.045) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(200,220,0,0.16) 0%, transparent 65%);
+			mix-blend-mode: multiply; /* Crucial! "Multiply" blends the light yellow into the gray paper, creating a deep, premium spotlight effect */
         }
 
         /* ========================================================
@@ -645,7 +647,7 @@
 
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             max-width: 600px;
             margin: 0 auto 40px;
             gap: 12px;
@@ -700,6 +702,114 @@
             .metrics-grid { grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
             .metric-num { font-size: 1.4rem; }
         }
+		
+		/* ========================================================
+		   WORK BREAKDOWN VIEWS STYLING
+		======================================================== */
+		.breakdown-view {
+			padding: 80px 0;
+			max-width: 850px;
+			margin: 0 auto;
+		}
+		.breakdown-back-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			background: none;
+			border: none;
+			color: var(--primary);
+			font-family: var(--font-mono);
+			font-weight: 700;
+			cursor: pointer;
+			margin-bottom: 32px;
+			font-size: 0.95rem;
+			transition: transform 0.2s ease;
+		}
+		.breakdown-back-btn:hover {
+			transform: translateX(-4px);
+		}
+		.breakdown-header {
+			margin-bottom: 40px;
+			border-bottom: 1px solid rgba(255,255,255,0.08);
+			padding-bottom: 24px;
+		}
+		body.light .breakdown-header {
+			border-bottom: 1px solid rgba(0,0,0,0.08);
+		}
+		.breakdown-tag {
+			font-family: var(--font-mono);
+			color: var(--primary);
+			font-size: 0.9rem;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			margin-bottom: 8px;
+		}
+		.breakdown-title {
+			font-size: 2.75rem;
+			font-family: var(--font-head);
+			color: var(--text);
+			line-height: 1.2;
+			margin-bottom: 16px;
+		}
+		.breakdown-meta-box {
+			background: rgba(255,255,255,0.02);
+			border-left: 3px solid var(--primary);
+			padding: 16px 20px;
+			border-radius: 4px;
+			margin: 24px 0;
+		}
+		body.light .breakdown-meta-box {
+			background: rgba(0,0,0,0.02);
+		}
+		.breakdown-meta-title {
+			font-family: var(--font-mono);
+			font-size: 0.8rem;
+			text-transform: uppercase;
+			color: var(--text-muted);
+			margin-bottom: 4px;
+		}
+		.breakdown-meta-value {
+			font-size: 1.1rem;
+			font-weight: 700;
+			color: var(--text);
+		}
+		.breakdown-section {
+			margin-bottom: 36px;
+		}
+		.breakdown-section-title {
+			font-family: var(--font-head);
+			font-size: 1.5rem;
+			color: var(--text);
+			margin-bottom: 12px;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+		.breakdown-text {
+			color: var(--text-muted);
+			line-height: 1.7;
+			font-size: 1.05rem;
+			margin-bottom: 16px;
+		}
+		.breakdown-list {
+			list-style: none;
+			padding-left: 0;
+			margin: 16px 0;
+		}
+		.breakdown-list li {
+			position: relative;
+			padding-left: 24px;
+			margin-bottom: 12px;
+			line-height: 1.6;
+			color: var(--text-muted);
+		}
+		.breakdown-list li::before {
+			content: "→";
+			position: absolute;
+			left: 0;
+			color: var(--primary);
+			font-weight: bold;
+		}
     </style>
 </head>
 <body>
@@ -870,8 +980,8 @@
         </div>
     </section>
 
-    <!-- ====================================================
-         PROJECTS / CASE STUDIES
+<!-- ====================================================
+         PROJECTS / CASE STUDIES SECTION
     ==================================================== -->
     <section id="projects">
         <div class="container reveal">
@@ -882,128 +992,136 @@
                 <button class="tab-pill"        role="tab" aria-selected="false" aria-controls="panel-casestudies" id="tab-casestudies" onclick="switchTab('casestudies')">Case Studies</button>
             </div>
 
-            <!-- PROJECTS -->
+            <!-- PROJECTS PANEL -->
             <div class="tab-panel active" id="panel-projects" role="tabpanel" aria-labelledby="tab-projects">
                 <div class="projects-grid">
 
+                    <!-- Project 1 -->
                     <article class="project-card">
                         <div class="project-thumb" aria-hidden="true">
-                            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="var(--primary)" style="width: 24px; height: 24px;"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
                         </div>
                         <div class="project-body">
                             <div>
                                 <p class="project-tag">Community Strategy</p>
                                 <h3 class="project-title">TechiesMatch: The Wired Community</h3>
-                                <p class="project-desc">Designed a full community-led growth strategy for TechiesMatch, including dual-platform architecture (Telegram + LinkedIn), a 2-week activity calendar, 10 engagement prompts, and a conversion plan that moved members toward product sign-up without feeling like a sales funnel.</p>
+                                <p class="project-desc">Designed a full community-led growth strategy for TechiesMatch, including dual-platform architecture (Telegram + LinkedIn), a 2-week activity calendar, and a conversion plan.</p>
                             </div>
-                            <a href="https://drive.google.com/drive/folders/1qB9wfFl7cQqsqbuhV6qfl1GddeEuMxXm" target="_blank" class="project-link" aria-label="View TechiesMatch Community Strategy">View Project</a>
+                            <button onclick="navigateToPage('project-wired-community')" class="project-link" style="background:none; border:none; cursor:pointer; padding:0; text-align:left;">View Project Breakdown</button>
                         </div>
                     </article>
 
+                    <!-- Project 2 -->
                     <article class="project-card">
                         <div class="project-thumb" aria-hidden="true">
-                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="var(--primary)" style="width: 24px; height: 24px;"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                         </div>
                         <div class="project-body">
                             <div>
                                 <p class="project-tag">Brevo Email Automation</p>
                                 <h3 class="project-title">TechiesMatch: Email Funnel Campaign</h3>
-                                <p class="project-desc">Built a 7-email automation campaign on Brevo for TechiesMatch, including funnel mapping, three audience segments, branching workflow logic, and a personalisation strategy. Rated one of the strongest strategy documents in the cohort.</p>
+                                <p class="project-desc">Built a 7-email automation campaign on Brevo for TechiesMatch, including funnel mapping, audience segments, and branching workflow logic.</p>
                             </div>
-                            <a href="https://drive.google.com/drive/folders/19qRmzHwSBLmGlchNXTyw_VtdLfKjl1kZ?usp=drive_link" target="_blank" class="project-link" aria-label="View TechiesMatch Email Funnel Campaign">View Project</a>
+                            <button onclick="navigateToPage('project-email-funnel')" class="project-link" style="background:none; border:none; cursor:pointer; padding:0; text-align:left;">View Project Breakdown</button>
                         </div>
                     </article>
 
+                    <!-- Project 3 -->
                     <article class="project-card">
                         <div class="project-thumb" aria-hidden="true">
-                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-1 14H5c-.55 0-1-.45-1-1V7h16v10c0 .55-.45 1-1 1zM7 10h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="var(--primary)" style="width: 24px; height: 24px;"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-1 14H5c-.55 0-1-.45-1-1V7h16v10c0 .55-.45 1-1 1zM7 10h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z"/></svg>
                         </div>
                         <div class="project-body">
                             <div>
                                 <p class="project-tag">Website & SEO</p>
                                 <h3 class="project-title">TechiesMatch: Launching Website</h3>
-                                <p class="project-desc">Designed and deployed a multi-page website for TechiesMatch with SEO keyword research, conversion-focused copy, a Safety page, waitlist funnel, and WCAG-compliant accessibility. The SEO and content strategy were among the best reviewed in the cohort.</p>
+                                <p class="project-desc">Designed and deployed a multi-page website for TechiesMatch with SEO keyword research, conversion-focused copy, a Safety page, and waitlist funnel.</p>
                             </div>
-                            <a href="https://techiesmatch.netlify.app/" target="_blank" class="project-link" aria-label="View TechiesMatch Growth Website">View Project</a>
+                            <button onclick="navigateToPage('project-seo-website')" class="project-link" style="background:none; border:none; cursor:pointer; padding:0; text-align:left;">View Project Breakdown</button>
                         </div>
                     </article>
 
-					<article class="project-card">
-						<div class="project-thumb" aria-hidden="true">
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 36px; height: 36px;">
-								<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-							</svg>
-						</div>
-						<div class="project-body">
-							<div>
-								<p class="project-tag">Founder-Led Marketing Strategy</p>
-								<h3 class="project-title">Michael Abu: MenuCard Founder</h3>
-								<p class="project-desc">Designed a founder-led marketing strategy positioning the startup founder as an authority figure across Instagram, Twitter, and LinkedIn. Received extra credit for thinking outside the brief: rated exceptional with a 10.5/10 score.</p>
-							</div>
-							<a href="https://puzzled-secure-c84.notion.site/Building-in-Public-The-Michael-Abu-Growth-Strategy-19712ba70f9882a7b64681fab767938a?pvs=74" target="_blank" class="project-link" aria-label="View MenuCard Growth Strategy">View Project</a>
-						</div>
-					</article>
-					
+                    <!-- Project 4 -->
+                    <article class="project-card">
+                        <div class="project-thumb" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="var(--primary)" style="width: 24px; height: 24px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                            </svg>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <p class="project-tag">Founder-Led Marketing Strategy</p>
+                                <h3 class="project-title">Michael Abu: MenuCard Founder</h3>
+                                <p class="project-desc">Designed a founder-led marketing strategy positioning the startup founder as an authority figure across Instagram, Twitter, and LinkedIn. Rated 10.5/10.</p>
+                            </div>
+                            <button onclick="navigateToPage('project-founder-strategy')" class="project-link" style="background:none; border:none; cursor:pointer; padding:0; text-align:left;">View Project Breakdown</button>
+                        </div>
+                    </article>
+                    
                 </div>
             </div>
 
-            <!-- CASE STUDIES -->
+            <!-- CASE STUDIES PANEL -->
             <div class="tab-panel" id="panel-casestudies" role="tabpanel" aria-labelledby="tab-casestudies">
                 <div class="projects-grid">
 
+                    <!-- Case Study 1 -->
                     <article class="project-card">
                         <div class="project-thumb" aria-hidden="true">
-                            <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96C5 16.1 6.1 17 7 17h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H19c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0 0 23.45 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="var(--primary)" style="width: 24px; height: 24px;"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96C5 16.1 6.1 17 7 17h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H19c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0 0 23.45 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                         </div>
                         <div class="project-body">
                             <div>
                                 <p class="project-tag">Campaign Strategy</p>
                                 <h3 class="project-title">The Boring Product Campaign</h3>
-                                <p class="project-desc">Transformed a low-interest everyday product into a compelling brand with a full-funnel marketing strategy: customer personas, ad copies, a landing page, email flow, and three growth hack ideas: demonstrating how strong positioning creates demand from scratch.</p>
+                                <p class="project-desc">Transformed a low-interest everyday product into a compelling brand with a full-funnel marketing strategy: customer personas, ad copies, and landing pages.</p>
                             </div>
-                            <a href="https://drive.google.com/drive/folders/1G_mPQuVenjjtHt1j9HBU4ZfQmdx39YID" target="_blank" class="project-link" aria-label="View Boring Product Campaign Case Study">View Case Study</a>
+                            <button onclick="navigateToPage('case-boring-product')" class="project-link" style="background:none; border:none; cursor:pointer; padding:0; text-align:left;">View Case Study Breakdown</button>
                         </div>
                     </article>
 
+                    <!-- Case Study 2 -->
                     <article class="project-card">
                         <div class="project-thumb" aria-hidden="true">
-                            <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="var(--primary)" style="width: 24px; height: 24px;"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
                         </div>
                         <div class="project-body">
                             <div>
                                 <p class="project-tag">Multi-Channel Strategy</p>
                                 <h3 class="project-title">Comprehensive Marketing Strategy: MenuCard</h3>
-                                <p class="project-desc">Developed a data-driven, multi-channel marketing strategy for MenuCard, a digital menu creation platform, following direct founder engagement. Covered SEO, paid ads, social media, content, and email marketing with keyword research and search intent mapping.</p>
+                                <p class="project-desc">Developed a data-driven, multi-channel marketing strategy for MenuCard, a digital menu platform, following direct founder engagement.</p>
                             </div>
-                            <a href="https://drive.google.com/drive/folders/1n5Va3S89osLkjbtcevrcUn_bX8nO4ZED" target="_blank" class="project-link" aria-label="View MenuCard Marketing Strategy Case Study">View Case Study</a>
+                            <button onclick="navigateToPage('case-menucard-strategy')" class="project-link" style="background:none; border:none; cursor:pointer; padding:0; text-align:left;">View Case Study Breakdown</button>
                         </div>
                     </article>
 
+                    <!-- Case Study 3 -->
                     <article class="project-card">
                         <div class="project-thumb" aria-hidden="true">
-                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="var(--primary)" style="width: 24px; height: 24px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
                         </div>
                         <div class="project-body">
                             <div>
                                 <p class="project-tag">Crisis PR</p>
                                 <h3 class="project-title">Crisis PR & Brand Management Simulation</h3>
-                                <p class="project-desc">Simulated a full PR crisis response for a startup: defining the crisis, drafting stakeholder communications, designing a brand recovery campaign, and establishing KPIs. Praised for exceptional strategic clarity and sophisticated stakeholder differentiation.</p>
+                                <p class="project-desc">Simulated a full PR crisis response for a startup: defining the crisis, drafting stakeholder communications, and designing a recovery campaign.</p>
                             </div>
-                            <a href="https://drive.google.com/drive/folders/1eoitvMCcomsnI0Tz0DxmxM2FYCYT0r7L" target="_blank" class="project-link" aria-label="View Crisis PR Case Study">View Case Study</a>
+                            <button onclick="navigateToPage('case-crisis-pr')" class="project-link" style="background:none; border:none; cursor:pointer; padding:0; text-align:left;">View Case Study Breakdown</button>
                         </div>
                     </article>
 
+                    <!-- Case Study 4 -->
                     <article class="project-card">
                         <div class="project-thumb" aria-hidden="true">
-                            <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="var(--primary)" style="width: 24px; height: 24px;"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
                         </div>
                         <div class="project-body">
                             <div>
                                 <p class="project-tag">B2B Growth</p>
                                 <h3 class="project-title">Enterprise B2B Growth Architecture</h3>
-                                <p class="project-desc">Designed a full-funnel B2B growth system for an AI-powered SaaS product targeting Nigerian and UK enterprise markets. Included multi-threaded buyer journey, demand strategy, lead scoring, paid acquisition under a $5K/month constraint, and a sales enablement toolkit.</p>
+                                <p class="project-desc">Designed a full-funnel B2B growth system for an AI-powered SaaS product targeting Nigerian and UK enterprise markets under budget constraints.</p>
                             </div>
-                            <a href="https://drive.google.com/drive/folders/1g2Bb99Yzo2S6wb99vg1hNk7CqkMxZH_P?usp=drive_link" target="_blank" class="project-link" aria-label="View Enterprise B2B Growth Architecture Case Study">View Case Study</a>
+                            <button onclick="navigateToPage('case-b2b-architecture')" class="project-link" style="background:none; border:none; cursor:pointer; padding:0; text-align:left;">View Case Study Breakdown</button>
                         </div>
                     </article>
 
@@ -1165,9 +1283,8 @@
             <nav class="contact-grid" aria-label="Contact links">
                 <a href="mailto:cotworks@gmail.com"         class="contact-item" aria-label="Send an email">Email</a>
                 <a href="tel:+2348168824702"                   class="contact-item" aria-label="Call by phone">Phone</a>
-                <a href="https://wa.me/+2348168824702"          class="contact-item" aria-label="Message on WhatsApp" target="_blank" rel="noopener">WhatsApp</a>
                 <a href="https://linkedin.com/in/ojukwuii"     class="contact-item" aria-label="Connect on LinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-                <a href="https://thecoticle.wordpress.com"     class="contact-item" aria-label="Connect on LinkedIn" target="_blank" rel="noopener">Blog</a>
+                <a href="https://thecoticle.wordpress.com"     class="contact-item" aria-label="Visit the Blog" target="_blank" rel="noopener">Blog</a>
             </nav>
 
             <p class="copyright">&copy; 2026 Chidubem Ojukwu. All rights reserved.</p>
@@ -1181,7 +1298,7 @@
 	<div id="contact-page-view" style="display: none; min-height: 100vh; background: var(--bg); padding-top: 40px;">
 		<section class="container" style="padding: 40px 24px; max-width: 800px; margin: 0 auto;">
 			<button onclick="navigateToPage('portfolio-page')" style="background: transparent; border: none; color: var(--primary); font-family: var(--font-head); font-weight: 700; cursor: pointer; margin-bottom: 32px; display: inline-flex; align-items: center; gap: 8px; font-size: 1rem;">
-				&larr; Back to Portfolio
+				Back to Portfolio
 			</button>
 			
 			<div style="background: var(--card); border: 1px solid var(--border); padding: 40px; border-radius: 16px; box-shadow: var(--shadow);">
@@ -1229,6 +1346,371 @@
 
 			</div>
 		</section>
+	</div>
+	
+	<!-- ====================================================
+		 PROJECT & CASE STUDY BREAKDOWN WRAPPERS
+	==================================================== -->
+
+	<!-- PROJECT 1 VIEW -->
+	<div id="project-wired-community-view" style="display: none;">
+		<div class="container">
+			<div class="breakdown-view">
+				<button onclick="navigateToPage('portfolio-page')" class="breakdown-back-btn">Back to Work</button>
+				<div class="breakdown-header">
+					<p class="breakdown-tag">Community Strategy</p>
+					<h2 class="breakdown-title">TechiesMatch: The Wired Community</h2>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Problem Statement</h3>
+					<p class="breakdown-text">TechiesMatch needed a way to build trust and familiarity with its target audience before asking them to sign up for a matchmaking platform. Cold acquisition for a trust-based product is difficult. People do not join a dating or networking app because they saw an ad — they join because they already feel like they belong somewhere connected to it. The product had no community infrastructure and no warm audience to convert from.</p>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Approach</h3>
+					<p class="breakdown-text">Designed a community-led growth strategy built around a dual-platform architecture. Rather than picking one channel, the strategy assigned distinct roles to each platform: Telegram for daily conversation and peer engagement, LinkedIn for professional visibility and broader audience acquisition. The community was given a distinct identity — The Wired — with its own positioning, rules, and reason to exist beyond just promoting the product. Every activity in the calendar was tied to a specific goal so the community never felt like a waiting room for a sales pitch.</p>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Deliverables</h3>
+					<ul class="breakdown-list">
+						<li>Community concept and positioning statement</li>
+						<li>Target audience and member profile</li>
+						<li>Platform strategy for Telegram and LinkedIn with defined roles for each</li>
+						<li>2-week community activity calendar across both platforms</li>
+						<li>10 discussion prompts tailored to the TechiesMatch audience</li>
+						<li>Community rules and moderation guidelines</li>
+						<li>Community-to-product conversion plan</li>
+						<li>Growth and retention strategy</li>
+					</ul>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Outcomes</h3>
+					<div class="breakdown-meta-box">
+						<p class="breakdown-meta-title">Evaluation Highlight</p>
+						<p class="breakdown-meta-value">Submitted as part of Stage 7 of the HNG Cohort 14 Sales and Marketing track. The dual-platform structure and conversion strategy were specifically noted by evaluators as intentional and product-aligned. The community concept directly informed the Telegram channel used in the TechiesMatch website launch.</p>
+					</div>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Key Learnings</h3>
+					<p class="breakdown-text">A community only works when it has a reason to exist that is separate from the product it supports. The most important design decision here was giving The Wired its own identity. Members join for the community and stay for the product — not the other way around. Platform selection also matters more than most strategies acknowledge: the roles each platform plays need to be distinct, otherwise you are just posting the same thing in two places.</p>
+				</div>
+				<a href="https://drive.google.com/drive/folders/1qB9wfFl7cQqsqbuhV6qfl1GddeEuMxXm" target="_blank" class="btn btn-primary" style="margin-top:20px;">Open Raw Strategy Asset Directory</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- PROJECT 2 VIEW -->
+	<div id="project-email-funnel-view" style="display: none;">
+		<div class="container">
+			<div class="breakdown-view">
+				<button onclick="navigateToPage('portfolio-page')" class="breakdown-back-btn">Back to Work</button>
+				<div class="breakdown-header">
+					<p class="breakdown-tag">Brevo Email Automation</p>
+					<h2 class="breakdown-title">TechiesMatch: Email Funnel Campaign</h2>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Problem Statement</h3>
+					<p class="breakdown-text">TechiesMatch needed an automated email system that could move a cold lead from first contact to product sign-up without requiring manual follow-up at every step. The challenge with a trust-based matchmaking platform is that people need more than one touchpoint before they commit. A single welcome email is not enough. The system needed to do the work of building familiarity, handling objections, and nudging action — all without feeling robotic.</p>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Approach</h3>
+					<p class="breakdown-text">Mapped the full customer journey from awareness to retention before writing a single email. Defined three audience segments with different entry points and different objections, then built the automation logic around behaviour rather than time alone. If a user clicked, they moved forward. If they did not open, the sequence adjusted. The email copy was written to feel human first — direct, specific to the TechiesMatch audience, and focused on what the reader was thinking at each stage rather than what the product wanted to say.</p>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Deliverables</h3>
+					<ul class="breakdown-list">
+						<li>Full funnel map across five stages: awareness, interest, consideration, conversion, and retention</li>
+						<li>Three audience segments with defined pain points, objections, and messaging direction</li>
+						<li>7-email sequence with subject lines, preview texts, body copy, and CTAs for each email</li>
+						<li>Automation workflow with entry triggers, time delays, branching logic, and behaviour-based conditions</li>
+						<li>Personalisation strategy covering name, segment, behaviour, and use-case-based messaging</li>
+						<li>Screenshots of emails built and sent inside Brevo</li>
+						<li>KPI framework covering open rate, click-through rate, conversion rate, and re-engagement rate</li>
+					</ul>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Outcomes</h3>
+					<div class="breakdown-meta-box">
+						<p class="breakdown-meta-title">Performance Metrics</p>
+						<p class="breakdown-meta-value">Received a 96.7% rating as one of the strongest strategy documents by mentor evaluators. Specifically praised for good subject lines.</p>
+					</div>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Key Learnings</h3>
+					<p class="breakdown-text">Email marketing fails when it is written from the brand's perspective instead of the reader's. Every email in this sequence was written by asking: what is this person thinking right now, and what do they need to hear to take one step forward? The branching logic was also a significant upgrade over a linear sequence — it meant the automation responded to real behaviour instead of assuming everyone moves at the same pace.</p>
+				</div>
+				<a href="https://drive.google.com/drive/folders/19qRmzHwSBLmGlchNXTyw_VtdLfKjl1kZ?usp=drive_link" target="_blank" class="btn btn-primary" style="margin-top:20px;">Open Raw Strategy Asset Directory</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- PROJECT 3 VIEW -->
+	<div id="project-seo-website-view" style="display: none;">
+		<div class="container">
+			<div class="breakdown-view">
+				<button onclick="navigateToPage('portfolio-page')" class="breakdown-back-btn">Back to Work</button>
+				<div class="breakdown-header">
+					<p class="breakdown-tag">Website & SEO</p>
+					<h2 class="breakdown-title">TechiesMatch: SEO Website</h2>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Problem Statement</h3>
+					<p class="breakdown-text">TechiesMatch needed a public-facing website that could do three jobs at once: explain the product clearly to someone who had never heard of it, rank for relevant search terms to bring in organic traffic, and convert visitors into waitlist sign-ups or app downloads. Most early-stage startup websites do one of these well and ignore the others. The brief also required a minimum of eight distinct pages, WCAG accessibility compliance, and a documented SEO strategy.</p>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Approach</h3>
+					<p class="breakdown-text">Started with keyword research before writing a single line of copy. Used Ubersuggest with location set to All Locations rather than Nigeria, because Nigerian search volume is systematically underrepresented in aggregated tools. Mapped keywords to search intent and assigned each page a primary conversion goal before designing the content structure. Every page was built around the principle that it should provide value before asking the visitor to take action. The Safety page was added as a trust-building measure specific to the matchmaking context — no other submission in the cohort included one.</p>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Deliverables</h3>
+					<ul class="breakdown-list">
+						<li>Live multi-page website at techiesmatch.netlify.app</li>
+						<li>Keyword research report with search volumes, difficulty scores, and intent mapping</li>
+						<li>SEO implementation across meta titles, descriptions, heading hierarchy, image alt text, and URL structure</li>
+						<li>Conversion-focused copy across all pages including a waitlist funnel</li>
+						<li>Safety page addressing the specific trust concerns of a matchmaking audience</li>
+						<li>WCAG accessibility compliance across contrast, readability, alt text, and keyboard navigation</li>
+						<li>Full strategy document explaining page selection, keyword decisions, and CTA placement rationale</li>
+					</ul>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Outcomes</h3>
+					<div class="breakdown-meta-box">
+						<p class="breakdown-meta-title">Performance Metrics</p>
+						<p class="breakdown-meta-value">Received an 86% rating as one of the best reviewed works for SEO and content strategy by mentor evaluators. The keyword research insight was specifically cited as a sophisticated research decision.</p>
+					</div>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Key Learnings</h3>
+					<p class="breakdown-text">SEO without conversion thinking is just traffic. The most useful insight from this project was that every page decision — what to include, where to place the CTA, how to structure the FAQ — should be made with both the search engine and the human reader in mind at the same time. The Safety page was also a reminder that for trust-based products, removing fear is a more powerful conversion lever than listing features.</p>
+				</div>
+				<a href="https://techiesmatch.netlify.app/" target="_blank" class="btn btn-primary" style="margin-top:20px;">Launch Live Live Production App</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- PROJECT 4 VIEW -->
+	<div id="project-founder-strategy-view" style="display: none;">
+		<div class="container">
+			<div class="breakdown-view">
+				<button onclick="navigateToPage('portfolio-page')" class="breakdown-back-btn">Back to Work</button>
+				<div class="breakdown-header">
+					<p class="breakdown-tag">Founder-Led Marketing Strategy</p>
+					<h2 class="breakdown-title">Michael Abu: MenuCard Founder Strategy</h2>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Problem Statement</h3>
+					<p class="breakdown-text">MenuCard, a digital menu creation platform, needed to build awareness and credibility in a market where most potential users had never considered switching from physical menus or generic design tools. Paid acquisition at an early stage is expensive and short-lived. The founder had a story and a point of view that the product alone could not communicate. The challenge was to turn that into a sustained content presence that built trust before asking anyone to try the product.</p>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Approach</h3>
+					<p class="breakdown-text">Positioned the founder rather than the product as the primary voice. Defined a clear founder narrative built around a specific problem the founder observed, why it mattered, and why he was the right person to talk about it. Built content pillars that gave the founder consistent topics to post about without repeating himself, then designed a 4-week calendar across Instagram, Twitter, and LinkedIn with platform-specific formats for each. The engagement strategy focused on converting content viewers into product users through DMs, comment responses, and community participation rather than direct calls to sign up.</p>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Deliverables</h3>
+					<ul class="breakdown-list">
+						<li>Founder positioning statement and narrative</li>
+						<li>Three content pillars with rationale and example post ideas for each</li>
+						<li>4-week content calendar across Instagram, Twitter, and LinkedIn</li>
+						<li>Platform-specific post formats tailored to each audience</li>
+						<li>Engagement and conversion strategy covering daily actions, DM approach, and sign-up path</li>
+						<li>WCAG accessibility considerations for all content formats</li>
+						<li>Mock-ups of content across all three platforms</li>
+					</ul>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Outcomes</h3>
+					<div class="breakdown-meta-box">
+						<p class="breakdown-meta-title">Performance Metrics</p>
+						<p class="breakdown-meta-value">Received a 10.5/10 score, one of the only submissions in the cohort to receive extra credit. Described as exceptional and noted it thought outside the brief in a way others did not.</p>
+					</div>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Key Learnings</h3>
+					<p class="breakdown-text">Founder-led marketing only works when the founder has a genuine point of view, not just product updates. The most important decision in this project was building the content pillars around the problem space rather than the product features. A founder who talks about the problem their audience faces every day builds more trust in a month than a year of product announcements.</p>
+				</div>
+				<a href="https://docs.google.com/document/d/1z18DGa79C5Dj87hLdH30sr7BzQStnSjTn8UgLk0POF4/export?format=pdf" target="_blank" class="btn btn-primary" style="margin-top:20px;">Open Case Breakdown Sheet</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- CASE STUDY 1 VIEW -->
+	<div id="case-boring-product-view" style="display: none;">
+		<div class="container">
+			<div class="breakdown-view">
+				<button onclick="navigateToPage('portfolio-page')" class="breakdown-back-btn">Back to Work</button>
+				<div class="breakdown-header">
+					<p class="breakdown-tag">Campaign Strategy</p>
+					<h2 class="breakdown-title">The Boring Product Campaign</h2>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Problem Statement</h3>
+					<p class="breakdown-text">The challenge was to take a low-interest, everyday product with no obvious emotional appeal and build a complete marketing strategy around it that could realistically drive growth from zero. Most commodity products fail at marketing because they lead with features or price. The task was to demonstrate that strong positioning and a clear customer understanding can create demand for almost anything.</p>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Approach</h3>
+					<p class="breakdown-text">Started by identifying who would actually care about the product and why, before touching any copy or creative. Built a customer persona grounded in a specific use case rather than demographics alone. The positioning strategy focused on one outcome the target customer wanted, then built the entire funnel around delivering that outcome in every touchpoint — from the first ad impression to the post-purchase email. The landing page was designed to convert a visitor who knew nothing about the product into someone ready to buy within a single scroll.</p>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Deliverables</h3>
+					<ul class="breakdown-list">
+						<li>Full-funnel marketing strategy from awareness to action</li>
+						<li>One detailed customer persona with pain points, motivations, and objections</li>
+						<li>3 ad copies across different formats</li>
+						<li>2 ad poster creatives</li>
+						<li>Landing page copy and structure</li>
+						<li>Email flow covering welcome, nurture, and conversion</li>
+						<li>3 growth hack ideas grounded in the product's specific context</li>
+					</ul>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Outcomes</h3>
+					<div class="breakdown-meta-box">
+						<p class="breakdown-meta-title">Strategic Core</p>
+						<p class="breakdown-meta-value">Demonstrated the ability to build a complete marketing system for a product with no inherent marketing advantage and established the foundational funnel approach carried into later stages.</p>
+					</div>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Key Learnings</h3>
+					<p class="breakdown-text">Every product has a customer who genuinely needs it. The work is finding that person and speaking directly to them instead of trying to appeal to everyone. This project also reinforced that a landing page is not a brochure — it is a conversation with a specific person who has a specific doubt, and every section exists to resolve one of those doubts before the next one appears.</p>
+				</div>
+				<a href="https://drive.google.com/drive/folders/1G_mPQuVenjjtHt1j9HBU4ZfQmdx39YID" target="_blank" class="btn btn-primary" style="margin-top:20px;">Open Strategic Case Assets</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- CASE STUDY 2 VIEW -->
+	<div id="case-menucard-strategy-view" style="display: none;">
+		<div class="container">
+			<div class="breakdown-view">
+				<button onclick="navigateToPage('portfolio-page')" class="breakdown-back-btn">Back to Work</button>
+				<div class="breakdown-header">
+					<p class="breakdown-tag">Multi-Channel Strategy</p>
+					<h2 class="breakdown-title">Comprehensive Marketing Strategy: MenuCard</h2>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Problem Statement</h3>
+					<p class="breakdown-text">MenuCard needed a marketing strategy grounded in real data rather than assumptions. As a digital menu creation platform, it sat in a space where most potential users either did not know the product existed or did not yet see a reason to switch from how they currently handled menus. The strategy needed to identify where those users were, what they were searching for, and how to reach them across multiple channels without spreading a limited early-stage budget too thin.</p>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Approach</h3>
+					<p class="breakdown-text">Started with a direct conversation with the founder to understand the product, the target audience, and the competitive landscape before forming any strategic opinions. Used that conversation to anchor all subsequent research. Keyword research was conducted to map what potential users were actually searching for, then search intent was used to assign each keyword to the appropriate channel and funnel stage. The multi-channel plan was built so that each channel reinforced the others rather than operating independently.</p>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Deliverables</h3>
+					<ul class="breakdown-list">
+						<li>Founder engagement summary and key product insights</li>
+						<li>Keyword research report with search volumes, intent categories, and channel assignments</li>
+						<li>Multi-channel strategy covering SEO, paid ads, social media, content marketing, and email</li>
+						<li>Channel-specific recommendations with rationale for each</li>
+						<li>Content direction for blog, social, and educational formats</li>
+						<li>Full strategy presentation deck</li>
+					</ul>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Outcomes</h3>
+					<div class="breakdown-meta-box">
+						<p class="breakdown-meta-title">Strategic Core</p>
+						<p class="breakdown-meta-value">Keyword research and intent mapping directly informed the more advanced SEO work done for future products in later phases.</p>
+					</div>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Key Learnings</h3>
+					<p class="breakdown-text">A marketing strategy built without talking to the product owner is guesswork dressed up as analysis. The founder conversation in this project changed several assumptions that would have produced a weaker strategy. It also reinforced that multi-channel does not mean doing everything — it means choosing the channels where your specific audience already is and making sure they work together.</p>
+				</div>
+				<a href="https://drive.google.com/drive/folders/1n5Va3S89osLkjbtcevrcUn_bX8nO4ZED" target="_blank" class="btn btn-primary" style="margin-top:20px;">Open Strategy Presentation Deck</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- CASE STUDY 3 VIEW -->
+	<div id="case-crisis-pr-view" style="display: none;">
+		<div class="container">
+			<div class="breakdown-view">
+				<button onclick="navigateToPage('portfolio-page')" class="breakdown-back-btn">Back to Work</button>
+				<div class="breakdown-header">
+					<p class="breakdown-tag">Crisis PR</p>
+					<h2 class="breakdown-title">Crisis PR & Brand Management Simulation</h2>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Problem Statement</h3>
+					<p class="breakdown-text">TechiesMatch, as a matchmaking platform, carries an inherent trust risk. Any safety incident involving a user — whether real or alleged — has the potential to destroy the platform's credibility overnight, particularly in a market where trust is the primary product. The challenge was to design a crisis response system that could protect the brand's reputation, stabilise public sentiment, and rebuild user trust after a serious safety-related incident became public.</p>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Approach</h3>
+					<p class="breakdown-text">Defined a realistic crisis scenario specific to the matchmaking context before building any response materials. The scenario was grounded in the product's actual vulnerability rather than a generic crisis template. Stakeholder groups were mapped individually because each group needed different information, delivered through different channels, in a different tone and at a different time. The recovery campaign was designed to address the root fear the crisis had created — that the platform was not safe — rather than just managing the news cycle.</p>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Deliverables</h3>
+					<ul class="breakdown-list">
+						<li>Full crisis definition including what happened, who was affected, why it mattered, and public risk metrics</li>
+						<li>Formal press release draft</li>
+						<li>Three public-facing social media response posts</li>
+						<li>Stakeholder communication plan covering customers, employees, media, investors, and brand ambassadors</li>
+						<li>Brand recovery campaign with metrics, messaging, content ideas, and execution timeline</li>
+						<li>KPI framework for measuring brand recovery across sentiment, retention, and engagement metrics</li>
+					</ul>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Outcomes</h3>
+					<div class="breakdown-meta-box">
+						<p class="breakdown-meta-title">Performance Metrics</p>
+						<p class="breakdown-meta-value">Received a rating of 88.9%, praised for exceptional crisis clarity with vivid, specific scenario details. Stakeholder differentiation and recovery approach described as highly sophisticated.</p>
+					</div>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Key Learnings</h3>
+					<p class="breakdown-text">Crisis communication is not about controlling the narrative — it is about being the most honest voice in the room before someone else defines the story for you. The most important structural decision in this project was treating each stakeholder group as having a completely different emotional state and information need. Precision in stakeholder mapping is the difference between a response that holds and one that creates a second crisis.</p>
+				</div>
+				<a href="https://drive.google.com/drive/folders/1eoitvMCcomsnI0Tz0DxmxM2FYCYT0r7L" target="_blank" class="btn btn-primary" style="margin-top:20px;">Open Crisis PR Vault</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- CASE STUDY 4 VIEW -->
+	<div id="case-b2b-architecture-view" style="display: none;">
+		<div class="container">
+			<div class="breakdown-view">
+				<button onclick="navigateToPage('portfolio-page')" class="breakdown-back-btn">Back to Work</button>
+				<div class="breakdown-header">
+					<p class="breakdown-tag">B2B Growth</p>
+					<h2 class="breakdown-title">Enterprise B2B Growth Architecture</h2>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Problem Statement</h3>
+					<p class="breakdown-text">A mid-stage SaaS company with an AI-powered HR analytics product was struggling to convert leads into paying customers. The sales team complained that marketing leads were not ready to buy. Deal cycles were long with high drop-off after demos. The company was also attempting to expand from Nigeria into the UK with limited brand awareness in the new market. The budget was $5,000 per month, the sales team had four reps, and the marketing team had two people. The task was to build a complete B2B growth system that worked within those constraints.</p>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Approach</h3>
+					<p class="breakdown-text">Rejected a linear funnel model from the start because enterprise B2B deals do not work that way. Multiple people inside the buying company have different priorities and different objections, and they rarely move together. Built the strategy around a multi-threaded buyer journey that mapped three distinct roles in the buying committee — their conflicting priorities, hidden objections, and what each one needed to say yes. Demand strategy was split into creation and capture, with separate channel logic for Nigeria and the UK because the two markets required different messaging approaches and had different levels of product awareness.</p>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Deliverables</h3>
+					<ul class="breakdown-list">
+						<li>Multi-threaded buyer journey across three buying committee roles</li>
+						<li>Demand creation and demand capture strategy with channel and messaging rationale for both Nigeria and UK markets</li>
+						<li>Content ecosystem including one flagship asset, three supporting assets, and two sales assist assets</li>
+						<li>Lead scoring model combining behavioural and firmographic signals with custom MQL and SQL definitions</li>
+						<li>Paid acquisition plan with channel allocation, CAC expectations, and risk analysis across a $5,000 monthly budget</li>
+						<li>Non-linear email funnel with branching logic for engaged non-converters, demo no-shows, and post-demo drop-offs</li>
+						<li>Sales and marketing SLA with feedback loop system</li>
+						<li>Outbound sequences across LinkedIn and email for three distinct buying roles</li>
+						<li>Objection handling matrix, demo narrative structure, and deal rescue playbook</li>
+					</ul>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Outcomes</h3>
+					<div class="breakdown-meta-box">
+						<p class="breakdown-meta-title">Strategic Value</p>
+						<p class="breakdown-meta-value">The constraint-based thinking — particularly the paid acquisition model under a fixed budget — directly informed the prioritisation approach used in later projects.</p>
+					</div>
+				</div>
+				<div class="breakdown-section">
+					<h3 class="breakdown-section-title">Key Learnings</h3>
+					<p class="breakdown-text">B2B growth fails when marketing treats the company as the buyer instead of the committee. Every decision in this architecture was made by asking which person inside the organisation it was actually for. The other significant learning was about constraint as a creative tool — a $5,000 budget forces prioritisation decisions that a larger budget never would, and those decisions produce a more coherent strategy than one that tries to be everywhere at once.</p>
+				</div>
+				<a href="https://drive.google.com/drive/folders/1g2Bb99Yzo2S6wb99vg1hNk7CqkMxZH_P?usp=drive_link" target="_blank" class="btn btn-primary" style="margin-top:20px;">Open Enterprise Toolkit Directory</a>
+			</div>
+		</div>
 	</div>
 
     <!-- ====================================================
@@ -1370,23 +1852,61 @@
     </script>
 
 <script>
-    function navigateToPage(targetPage) {
-        const portfolioView = document.getElementById('main-portfolio-view');
-        const contactView = document.getElementById('contact-page-view');
-        
-        if (targetPage === 'contact-page') {
-            portfolioView.style.display = 'none';
+function navigateToPage(targetPage) {
+    // Collect all core views
+    const portfolioView = document.getElementById('main-portfolio-view');
+    const contactView   = document.getElementById('contact-page-view');
+    
+    // Array tracking all your new view element IDs
+    const breakdownIds = [
+        'project-wired-community',
+        'project-email-funnel',
+        'project-seo-website',
+        'project-founder-strategy',
+        'case-boring-product',
+        'case-menucard-strategy',
+        'case-crisis-pr',
+        'case-b2b-architecture'
+    ];
+
+    // Hide everything completely first to wipe the slate clean
+    if (portfolioView) portfolioView.style.display = 'none';
+    if (contactView) contactView.style.display = 'none';
+    
+    breakdownIds.forEach(id => {
+        const el = document.getElementById(id + '-view');
+        if (el) el.style.display = 'none';
+    });
+
+    // Toggle view layout elements active depending on targeted click parameter
+    if (targetPage === 'contact-page') {
+        if (contactView) {
             contactView.style.display = 'block';
-            // Reset the form state just in case they are opening it again
             document.getElementById('form-container').style.display = 'block';
             document.getElementById('success-container').style.display = 'none';
-            window.scrollTo(0, 0);
-        } else if (targetPage === 'portfolio-page') {
-            contactView.style.display = 'none';
-            portfolioView.style.display = 'block';
-            window.scrollTo(0, 0);
+        }
+    } else if (targetPage === 'portfolio-page') {
+        if (portfolioView) portfolioView.style.display = 'block';
+    } else {
+        // If it's one of our breakdown pages, turn it on!
+        const activeBreakdown = document.getElementById(targetPage + '-view');
+        if (activeBreakdown) {
+            activeBreakdown.style.display = 'block';
         }
     }
+    
+    // Snap scroll smooth frame right back to absolute apex peak on click navigation
+    window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+// AUTOMATIC NAV LINKS LISTENER
+// This finds any link on your site pointing to a section anchor (starting with #)
+// and forces the portfolio view to activate instantly when clicked.
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function() {
+        navigateToPage('portfolio-page');
+    });
+});
 
     // AJAX Formspree Handling for Custom Success Message
     document.getElementById('portfolio-contact-form').addEventListener('submit', function(event) {
