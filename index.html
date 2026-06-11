@@ -36,14 +36,14 @@
            LIGHT MODE
         ======================================================== */
         body.light {
-            --primary: #C8DC00;
-            --bg: #F5F5F0;
-            --bg-alt: #EDEEE8;
-            --card: #FFFFFF;
-            --card-hover: #F8F8F4;
-            --border: rgba(0,0,0,0.08);
-            --text: #1A1A1A;
-            --text-muted: #6B7280;
+            --primary: #879600;           /* FIXED: A darker, rich pear green that passes WCAG AA on light backgrounds */
+            --bg: #F5F5F0;                
+            --bg-alt: #EDEEE8;            
+            --card: #FFFFFF;              
+            --card-hover: #F8F8F4;        
+            --border: rgba(0,0,0,0.08);   
+            --text: #1A1A1A;              
+            --text-muted: #535A66;        /* FIXED for compliance */
             --shadow: 0 4px 24px rgba(0,0,0,0.10);
             --noise-opacity: 0.018;
         }
@@ -135,6 +135,7 @@
             font-size: 1rem;
             color: var(--primary);
             letter-spacing: -0.3px;
+			cursor: pointer; /* Makes it feel like a real link */
         }
 
         .nav-links {
@@ -822,7 +823,7 @@
     ==================================================== -->
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="navbar-inner">
-            <span class="nav-logo">COTworks</span>
+            <a href="#" class="nav-logo" onclick="navigateToPage('portfolio-page')">COTworks</a>
 
             <ul class="nav-links" id="navLinks">
                 <li><a href="#skills">Skills</a></li>
@@ -1143,7 +1144,7 @@
                         <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.99 5.99 0 0 0 11 15.91V19H9v2h6v-2h-2v-3.09c1.73-.37 3.22-1.4 3.96-2.97 2.47-.31 4.39-2.4 4.39-4.94V7c0-1.1-.9-2-2-2zM5 7h2v3H5V7zm14 3h-2V7h2v3z"/></svg>
                     </div>
                     <div class="award-details">
-                        <h3>Best S&M Intern: Interns' Choice</h3>
+                        <h3>Best Sales & Marketing Intern: Interns' Choice</h3>
                         <p>Voted by fellow HNG i14 Cohort interns across all tracks.</p>
                     </div>
                 </div>
@@ -1153,7 +1154,7 @@
                         <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.99 5.99 0 0 0 11 15.91V19H9v2h6v-2h-2v-3.09c1.73-.37 3.22-1.4 3.96-2.97 2.47-.31 4.39-2.4 4.39-4.94V7c0-1.1-.9-2-2-2zM5 7h2v3H5V7zm14 3h-2V7h2v3z"/></svg>
                     </div>
                     <div class="award-details">
-                        <h3>Best S&M Intern: Mentors' Choice</h3>
+                        <h3>Best Sales & Marketing Intern: Mentors' Choice</h3>
                         <p>Awarded by HNG mentors and evaluators at the close of Cohort 14.</p>
                     </div>
                 </div>
@@ -1287,7 +1288,7 @@
                 <a href="https://thecoticle.wordpress.com"     class="contact-item" aria-label="Visit the Blog" target="_blank" rel="noopener">Blog</a>
             </nav>
 
-            <p class="copyright">&copy; 2026 Chidubem Ojukwu. All rights reserved.</p>
+            <p class="copyright">&copy; 2026 COTworks. All rights reserved.</p>
         </div>
     </footer>
 	</div>
